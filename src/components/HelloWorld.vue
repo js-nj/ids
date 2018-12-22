@@ -10,6 +10,7 @@
 
 <script>
 import axios from 'axios';
+import Cookies from 'js-cookie';
 axios.defaults.baseURL = 'http://localhost:3000'
 export default {
   name: 'HelloWorld',
@@ -28,11 +29,12 @@ export default {
           id: this.account,
           pw:this.password
         }
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
+      }).then(function (response) {
+        if(response.data.code === 'ok'){
+          //debugger;
+          Cookies.set('_cas_', response.data.id,{ expires: 30 });
+        }
+      }).catch(function (error) {
         console.log(error);
       })
     }

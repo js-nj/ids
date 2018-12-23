@@ -33,6 +33,10 @@ export default {
         if(response.data.code === 'ok'){
           //debugger;
           Cookies.set('_cas_', response.data.id,{ expires: 30 });
+          if(response.data.cb){
+            //debugger;
+            window.location.href=response.data.cb;
+          }
         }
       }).catch(function (error) {
         console.log(error);
